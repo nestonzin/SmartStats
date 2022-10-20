@@ -1,3 +1,9 @@
+import { DefaultLayout } from "../_layouts";
+
 export default function Home() {
-  return <h1>ola mundo!</h1>;
+  return (
+    <DefaultLayout>
+      
+    </DefaultLayout>
+  )
 }
