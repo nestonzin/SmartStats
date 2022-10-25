@@ -21,8 +21,6 @@ interface Schedule {
 export const Sidebar = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
 
-  console.log(schedules);
-
   useEffect(() => {
     async function getScheduleGames() {
       const response = await api.get('/getSchedule', {
