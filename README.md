@@ -13,11 +13,14 @@ Desenvolvedor - Nestor <br>
 
 ## Techs usadas
 
+<div align= center>
 <img height="35em" src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white"/>
 <img height="35em" src="https://img.shields.io/badge/vercel-%23000000.svg?style=flat&logo=vercel&logoColor=white"/>
 <img height="35em" src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=flat&logo=figma&logoColor=white"/>
 <img height="35em" src="https://img.shields.io/badge/Notion-%23000000.svg?style=flat&logo=notion&logoColor=white"/>
+<img height="35em" src="https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB"/>
 
+</div>
 
 
 
