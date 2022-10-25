@@ -1,124 +1,52 @@
-import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import api from '../../services/api';
+
+interface Match {
+  teams: {
+    name: string;
+    code: string;
+    image: string;
+  }[];
+}
+
+interface Schedule {
+  startTime: Date;
+  league: {
+    name: string;
+  };
+  match: Match;
+}
 
 export const Sidebar = () => {
-  const gamesPattern = [
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-    {
-      blueTeam: "RNG",
-      redTeam: "JDG",
-      teamLogo: "",
-      gameDate: "Sexta feira",
-      championship: "Mundial Internacional",
-      gameHour: "20:00",
-    },
-  ];
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
+
+  console.log(schedules);
+
+  useEffect(() => {
+    async function getScheduleGames() {
+      const response = await api.get('/getSchedule', {
+        params: {
+          hl: 'pt-BR',
+        },
+      });
+      setSchedules(response.data.data.schedule.events);
+    }
+    getScheduleGames();
+  }, []);
+
   return (
     <Flex
       bg="brand"
-      w={["100%", "100%", "100%", "25%"]}
+      w={['100%', '100%', '100%', '25%']}
       h="calc(100vh - 5rem)"
       flexDirection="column"
       justifyContent="space-between"
       overflowY="scroll"
     >
-      {gamesPattern.map((gamePattern, index) => (
+      {schedules.map((schedule, index) => (
         <Flex
-          key={`${gamePattern.blueTeam}-${index}`}
+          key={`${schedule}-${index}`}
           flexDirection="column"
           alignItems="center"
           bg="#D9D9D9"
@@ -126,21 +54,20 @@ export const Sidebar = () => {
           cursor="pointer"
           border="1px"
         >
-          <Text fontWeight="500">{gamePattern.gameDate}</Text>
-          <Text fontWeight="500">{gamePattern.championship}</Text>
-          <Text fontWeight="500">{gamePattern.gameHour}</Text>
+          <Text fontWeight="500">{new Date(schedule.startTime).toLocaleString('pt-BR', { weekday: 'long' })}</Text>
+          <Text fontWeight="500">{schedule.league.name}</Text>
           <Flex justifyContent="space-between" w="100%" alignItems="center">
             <Box>
-              <Avatar size="sm" />
+              <Avatar size="sm" src={schedule.match.teams[0].image} />
               <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
-                {gamePattern.blueTeam}
+                {schedule.match.teams[0].code}
               </Text>
             </Box>
             <Text fontWeight="500">vs</Text>
             <Box>
-              <Avatar size="sm" />
+              <Avatar size="sm" src={schedule.match.teams[1].image} />
               <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
-                {gamePattern.redTeam}
+                {schedule.match.teams[1].code}
               </Text>
             </Box>
           </Flex>
