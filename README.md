@@ -5,7 +5,7 @@ Este é um projeto desenvolvido para estudos
 
 ## Colaboradores
 
-Design/UI/UX - Leticia
+Design/UI/UX - Leticia <br>
 TechLeader - Felipe Austriaco
 Desenvolvedor - Vinicius
 Desenvolvedor - Nestor
