@@ -3,56 +3,104 @@ import { Avatar, Box, Flex, Text } from "@chakra-ui/react";
 export const Sidebar = () => {
   const gamesPattern = [
     {
-      teamName: "RNG",
+      blueTeam: "RNG",
+      redTeam: "JDG",
       teamLogo: "",
       gameDate: "Sexta feira",
       championship: "Mundial Internacional",
       gameHour: "20:00",
     },
     {
-      teamName: "JDG",
+      blueTeam: "RNG",
+      redTeam: "JDG",
       teamLogo: "",
       gameDate: "Sexta feira",
       championship: "Mundial Internacional",
       gameHour: "20:00",
     },
     {
-      teamName: "Pain",
+      blueTeam: "RNG",
+      redTeam: "JDG",
       teamLogo: "",
       gameDate: "Sexta feira",
       championship: "Mundial Internacional",
       gameHour: "20:00",
     },
     {
-      teamName: "INTZ",
+      blueTeam: "RNG",
+      redTeam: "JDG",
       teamLogo: "",
       gameDate: "Sexta feira",
       championship: "Mundial Internacional",
       gameHour: "20:00",
     },
     {
-      teamName: "INTZ",
+      blueTeam: "RNG",
+      redTeam: "JDG",
       teamLogo: "",
       gameDate: "Sexta feira",
       championship: "Mundial Internacional",
       gameHour: "20:00",
     },
     {
-      teamName: "INTZ",
+      blueTeam: "RNG",
+      redTeam: "JDG",
       teamLogo: "",
       gameDate: "Sexta feira",
       championship: "Mundial Internacional",
       gameHour: "20:00",
     },
     {
-      teamName: "INTZ",
+      blueTeam: "RNG",
+      redTeam: "JDG",
       teamLogo: "",
       gameDate: "Sexta feira",
       championship: "Mundial Internacional",
       gameHour: "20:00",
     },
     {
-      teamName: "INTZ",
+      blueTeam: "RNG",
+      redTeam: "JDG",
+      teamLogo: "",
+      gameDate: "Sexta feira",
+      championship: "Mundial Internacional",
+      gameHour: "20:00",
+    },
+    {
+      blueTeam: "RNG",
+      redTeam: "JDG",
+      teamLogo: "",
+      gameDate: "Sexta feira",
+      championship: "Mundial Internacional",
+      gameHour: "20:00",
+    },
+    {
+      blueTeam: "RNG",
+      redTeam: "JDG",
+      teamLogo: "",
+      gameDate: "Sexta feira",
+      championship: "Mundial Internacional",
+      gameHour: "20:00",
+    },
+    {
+      blueTeam: "RNG",
+      redTeam: "JDG",
+      teamLogo: "",
+      gameDate: "Sexta feira",
+      championship: "Mundial Internacional",
+      gameHour: "20:00",
+    },
+    {
+      blueTeam: "RNG",
+      redTeam: "JDG",
+      teamLogo: "",
+      gameDate: "Sexta feira",
+      championship: "Mundial Internacional",
+      gameHour: "20:00",
+    },
+    {
+      blueTeam: "RNG",
+      redTeam: "JDG",
       teamLogo: "",
       gameDate: "Sexta feira",
       championship: "Mundial Internacional",
@@ -62,15 +110,15 @@ export const Sidebar = () => {
   return (
     <Flex
       bg="brand"
-      w={["100%", "100%", "25%", "25%"]}
-      h="100vh"
+      w={["100%", "100%", "100%", "25%"]}
+      h="calc(100vh - 5rem)"
       flexDirection="column"
-      justifyContent="space-around"
-      overflow="auto"
+      justifyContent="space-between"
+      overflowY="scroll"
     >
-      {gamesPattern.map((gamePattern) => (
+      {gamesPattern.map((gamePattern, index) => (
         <Flex
-          key={null}
+          key={`${gamePattern.blueTeam}-${index}`}
           flexDirection="column"
           alignItems="center"
           bg="#D9D9D9"
@@ -85,14 +133,14 @@ export const Sidebar = () => {
             <Box>
               <Avatar size="sm" />
               <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
-                RGE
+                {gamePattern.blueTeam}
               </Text>
             </Box>
             <Text fontWeight="500">vs</Text>
             <Box>
               <Avatar size="sm" />
               <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
-                JDG
+                {gamePattern.redTeam}
               </Text>
             </Box>
           </Flex>
