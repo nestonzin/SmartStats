@@ -23,9 +23,6 @@ export const Sidebar = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
-  console.log('teste loading', isLoading);
-  console.log('teste schedule', schedules);
-
   useEffect(() => {
     setIsLoading(true);
     async function getScheduleGames() {
