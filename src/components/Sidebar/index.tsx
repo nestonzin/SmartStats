@@ -21,8 +21,13 @@ interface Schedule {
 
 export const Sidebar = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
+  const [isLoading, setIsLoading] = useState<Boolean>(false);
+
+  console.log('teste loading', isLoading);
+  console.log('teste schedule', schedules);
 
   useEffect(() => {
+    setIsLoading(true);
     async function getScheduleGames() {
       const response = await api.get('/getSchedule', {
         params: {
@@ -30,6 +35,7 @@ export const Sidebar = () => {
         },
       });
       setSchedules(response.data.data.schedule.events);
+      setIsLoading(false);
     }
     getScheduleGames();
   }, []);
@@ -40,40 +46,51 @@ export const Sidebar = () => {
       w={['100%', '100%', '100%', '25%']}
       h="calc(100vh - 5rem)"
       flexDirection="column"
-      justifyContent="space-between"
+      justifyContent="flex-start"
       overflowY="scroll"
     >
-      {schedules
-        .filter(schedule => schedule.state.includes('unstarted'))
-        .map((schedule, index) => (
-          <Flex
-            key={`${schedule}-${index}`}
-            flexDirection="column"
-            alignItems="center"
-            bg="#D9D9D9"
-            p="1rem"
-            cursor="pointer"
-            border="1px"
-          >
-            <Text fontWeight="500">{new Date(schedule.startTime).toLocaleString('pt-BR', { calendar: 'long' })}</Text>
-            <Text fontWeight="500">{schedule.league.name}</Text>
-            <Flex justifyContent="space-between" w="100%" alignItems="center">
-              <Box>
-                <Avatar size="sm" src={schedule.match.teams[0].image} />
-                <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
-                  {schedule.match.teams[0].code}
-                </Text>
-              </Box>
-              <Text fontWeight="500">vs</Text>
-              <Box>
-                <Avatar size="sm" src={schedule.match.teams[1].image} />
-                <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
-                  {schedule.match.teams[1].code}
-                </Text>
-              </Box>
+      {isLoading ? (
+        <Spinner color="white" alignSelf="center" />
+      ) : (
+        schedules
+          .filter(schedule => schedule.state.includes('unstarted'))
+          .map((schedule, index) => (
+            <Flex
+              key={`${schedule}-${index}`}
+              flexDirection="column"
+              alignItems="center"
+              bg="#D9D9D9"
+              cursor="pointer"
+              border="1px"
+            >
+              {schedule.match.teams[0].code !== 'TBD' && (
+                <>
+                  <Text fontWeight="500">
+                    {new Date(schedule.startTime).toLocaleString('pt-BR', {
+                      calendar: 'long',
+                    })}
+                  </Text>
+                  <Text fontWeight="500">{schedule.league.name}</Text>
+                  <Flex justifyContent="space-between" w="100%" alignItems="center">
+                    <Box>
+                      <Avatar size="sm" src={schedule.match.teams[0].image} />
+                      <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
+                        {schedule.match.teams[0].code}
+                      </Text>
+                    </Box>
+                    <Text fontWeight="500">vs</Text>
+                    <Box>
+                      <Avatar size="sm" src={schedule.match.teams[1].image} />
+                      <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
+                        {schedule.match.teams[1].code}
+                      </Text>
+                    </Box>
+                  </Flex>
+                </>
+              )}
             </Flex>
-          </Flex>
-        ))}
+          ))
+      )}
     </Flex>
   );
 };
