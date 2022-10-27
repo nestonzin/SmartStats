@@ -8,7 +8,6 @@ export default function Home() {
     <DefaultLayout>
       <Flex>
         <Sidebar />
-
         <Carousel />
       </Flex>
     </DefaultLayout>

@@ -1,0 +1,19 @@
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.embla__slide img {
+  max-width: 35rem;
+  width: 100%;
+  height: auto;
+}

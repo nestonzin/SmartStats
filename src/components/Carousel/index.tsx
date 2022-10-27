@@ -1,26 +1,24 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
-import { CarouselProvider, Slider, Slide } from "pure-react-carousel";
-// import "pure-react-carousel/dist/react-carousel.es.css";
+import { Flex, Image } from "@chakra-ui/react";
+import useEmblaCarousel from "embla-carousel-react";
 
 export const Carousel: React.FC = () => {
-  const carouselImgs = ["/carousel1.png", "/carousel2.jpg", "/carousel3.jpg"];
+  const [emblaRef] = useEmblaCarousel();
 
   return (
-    <Flex>
-      <CarouselProvider
-        naturalSlideHeight={100}
-        naturalSlideWidth={125}
-        totalSlides={carouselImgs.length}
-      >
-        <Slider>
-          {carouselImgs.map((carouselImg, index) => (
-            <Slide key={index} index={index}>
-              <Image src={carouselImg} alt={""} maxW="5rem" />
-              {/* <Text color={["black"]}>Ola</Text> */}
-            </Slide>
-          ))}
-        </Slider>
-      </CarouselProvider>
+    <Flex justifyContent={["center"]} w={["100%"]} h={["50vh"]}>
+      <div className="embla" ref={emblaRef}>
+        <div className="embla__container">
+          <div className="embla__slide">
+            <Image as="img" src="carousel1.png" alt="" />
+          </div>
+          <div className="embla__slide">
+            <Image as="img" src="carousel2.jpg" alt="" />
+          </div>
+          <div className="embla__slide">
+            <Image as="img" src="carousel3.jpg" alt="" />
+          </div>
+        </div>
+      </div>
     </Flex>
   );
 };
