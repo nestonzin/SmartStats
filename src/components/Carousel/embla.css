@@ -3,13 +3,13 @@
 }
 .embla__container {
   display: flex;
+  padding: 1rem;
 }
 
 .embla__slide {
   flex: 0 0 100%;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 }
 
 .embla__slide img {
