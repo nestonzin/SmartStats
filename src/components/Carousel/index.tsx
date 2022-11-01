@@ -1,6 +1,8 @@
-import { Flex, Image, Box } from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { useCallback } from "react";
+import Autoplay from "embla-carousel-autoplay";
+import { Flex, Image, Box } from "@chakra-ui/react";
+import { PrevButton, NextButton } from "./../Carousel/EmblaCarouselButtons";
 import { CaretDoubleRight, CaretDoubleLeft } from "phosphor-react";
 
 export const Carousel: React.FC = () => {
@@ -23,7 +25,10 @@ export const Carousel: React.FC = () => {
     },
   ];
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
+
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
   }, [emblaApi]);
@@ -31,6 +36,18 @@ export const Carousel: React.FC = () => {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+  }, [emblaApi, onSelect]);
 
   return (
     <Flex w={["100%"]} justifyContent="center">
@@ -46,13 +63,17 @@ export const Carousel: React.FC = () => {
             </div>
           ))}
         </div>
-        <Flex w="100%" alignItems="center" justifyContent="space-around">
-          <button className="embla__prev" onClick={scrollPrev}>
-            <CaretDoubleLeft />
-          </button>
-          <button className="embla__next" onClick={scrollNext}>
-            <CaretDoubleRight />
-          </button>
+        <Flex
+          justifyContent={["space-between"]}
+          alignItems={["center"]}
+          p={["1rem"]}
+          position={["absolute"]}
+          top={["30%"]}
+          left={["25%"]}
+          w={["75%"]}
+        >
+          <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+          <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
         </Flex>
       </div>
     </Flex>

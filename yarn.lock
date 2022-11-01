@@ -1592,6 +1592,11 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
+embla-carousel-autoplay@^7.0.4:
+  version "7.0.4"
+  resolved "https://registry.npmjs.org/embla-carousel-autoplay/-/embla-carousel-autoplay-7.0.4.tgz#ddd20a3df341b49d727f664354ef019a7547c5f8"
+  integrity sha512-N0pRlqf0GxDvnXnWTx/rQOXePa/5l4lii5LAhNCzCSP0Qoj1APln8eGYzpCwkJ6m4Vc75lpnM+y37R9CaBm7Dg==
+
 embla-carousel-react@^7.0.3:
   version "7.0.3"
   resolved "https://registry.npmjs.org/embla-carousel-react/-/embla-carousel-react-7.0.3.tgz#343c972a1ac5869acba3d6e9c7eeb3bd27f7e335"
