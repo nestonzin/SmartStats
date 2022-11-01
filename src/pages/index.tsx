@@ -9,7 +9,11 @@ export default function Home() {
     <DefaultLayout>
       <Flex h="90vh" overflow={["auto", "hidden"]}>
         <Sidebar />
-        <Flex flexDirection="column" w={["80%"]}>
+        <Flex
+          flexDirection="column"
+          w={["80%"]}
+          justifyContent={["space-between"]}
+        >
           <Carousel />
           <LastMatches />
         </Flex>

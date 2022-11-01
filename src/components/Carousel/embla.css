@@ -3,8 +3,7 @@
 }
 .embla__container {
   display: flex;
-  height: 45vh;
-  background-color: black;
+  height: 50vh;
 }
 
 .embla__slide {
@@ -22,7 +21,7 @@
   cursor: pointer;
   width: 30px;
   height: 30px;
-  fill: #1bcacd;
+  fill: #1e1f24;
 }
 
 .embla__button:disabled {
