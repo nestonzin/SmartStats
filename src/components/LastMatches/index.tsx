@@ -103,11 +103,11 @@ export const LastMatches = () => {
                 </Flex>
                 <Text>VS</Text>
                 <Flex alignItems={["center"]} gap={[".5rem"]}>
+                  <Text>{completedEvent.match.teams[1].name}</Text>
                   <Avatar
                     src={completedEvent.match.teams[1].image}
                     size={"sm"}
                   />
-                  <Text>{completedEvent.match.teams[1].name}</Text>
                 </Flex>
               </Flex>
             </Flex>
