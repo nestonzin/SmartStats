@@ -54,7 +54,6 @@ export const LastMatches = () => {
     getCompletedGames();
   }, []);
 
-  console.log("peguei os jogos", completedEvents);
   return (
     <Flex
       flexDirection="column"
@@ -65,9 +64,12 @@ export const LastMatches = () => {
       <Box border="1px solid" w="100%" textAlign="center">
         <Text>ULTIMAS PARTIDAS</Text>
       </Box>
-      <Flex flexDirection={["column", "column", "row", "row"]}>
+      <Flex
+        flexDirection={["column", "column", "row", "row"]}
+        justifyContent={["center"]}
+      >
         {isLoading ? (
-          <Spinner />
+          <Spinner color="black" />
         ) : (
           completedEvents?.map((completedEvent, index) => (
             <Flex
@@ -84,16 +86,32 @@ export const LastMatches = () => {
               <Text>{getWinner(completedEvent)?.result.gameWins}</Text>
               <Text>{completedEvent.league.name}</Text>
               <Text>
-                {" "}
                 {new Date(completedEvent.startTime).toLocaleString("pt-BR", {
                   calendar: "long",
                 })}
               </Text>
-              <Flex>
-                <Avatar src={completedEvent.match.teams[0].image} />
-                <Text>{completedEvent.match.teams[0].name}</Text>
-                <Avatar src={completedEvent.match.teams[1].image} />
-                <Text>{completedEvent.match.teams[1].name}</Text>
+              <Flex
+                w="100%"
+                gap={["1rem"]}
+                justifyContent={["space-between"]}
+                alignItems={["center"]}
+                p="1rem"
+              >
+                <Flex alignItems={["center"]} gap={[".5rem"]}>
+                  <Avatar
+                    src={completedEvent.match.teams[0].image}
+                    size={"sm"}
+                  />
+                  <Text>{completedEvent.match.teams[0].name}</Text>
+                </Flex>
+                <Text>VS</Text>
+                <Flex alignItems={["center"]} gap={[".5rem"]}>
+                  <Avatar
+                    src={completedEvent.match.teams[1].image}
+                    size={"sm"}
+                  />
+                  <Text>{completedEvent.match.teams[1].name}</Text>
+                </Flex>
               </Flex>
             </Flex>
           ))
