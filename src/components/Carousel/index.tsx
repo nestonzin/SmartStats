@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { Flex, Image, Box } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 import { PrevButton, NextButton } from "./../Carousel/EmblaCarouselButtons";
-import { CaretDoubleRight, CaretDoubleLeft } from "phosphor-react";
 
 export const Carousel: React.FC = () => {
   const CarouselImages = [
