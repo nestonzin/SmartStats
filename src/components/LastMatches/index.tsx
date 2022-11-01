@@ -8,14 +8,16 @@ interface Match {
     count: number;
     type: string;
   };
-  teams: {
-    name: string;
-    code: string;
-    image: string;
-    result: {
-      gameWins: number;
-    };
-  }[];
+  teams: Team[];
+}
+
+interface Team {
+  name: string;
+  code: string;
+  image: string;
+  result: {
+    gameWins: number;
+  };
 }
 
 interface ICompletedGames {
