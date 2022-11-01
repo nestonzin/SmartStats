@@ -57,12 +57,7 @@ export const LastMatches = () => {
   }, []);
 
   return (
-    <Flex
-      flexDirection="column"
-      w="100%"
-      h="40vh"
-      justifyContent={["flex-start"]}
-    >
+    <Flex flexDirection="column" w="100%" justifyContent={["flex-start"]}>
       <Box border="1px solid" w="100%" textAlign="center">
         <Text>ULTIMAS PARTIDAS</Text>
       </Box>
