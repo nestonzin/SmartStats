@@ -9,23 +9,12 @@ export const Navbar = () => {
       justifyContent="space-between"
       alignItems="center"
       p="1rem"
-      h="5rem"
+      h="10vh"
     >
       <Text fontWeight="bold" color="white">
         SmartStats
       </Text>
       <Flex gap="2rem">
-        <Link
-          color="white"
-          _hover={{
-            bg: "rgba(128,128,128,.3)",
-            padding: "7.5px 16px",
-            borderRadius: "6.5px",
-            textAlign: "center",
-          }}
-        >
-          Jogos
-        </Link>
         <Link
           color="white"
           _hover={{

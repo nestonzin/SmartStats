@@ -4,6 +4,25 @@ import { useCallback } from "react";
 import { CaretDoubleRight, CaretDoubleLeft } from "phosphor-react";
 
 export const Carousel: React.FC = () => {
+  const CarouselImages = [
+    {
+      Image: "carousel1.jpg",
+      Alt: "Desenho do faker",
+    },
+    {
+      Image: "carousel4.png",
+      Alt: "Desenho de jogadores do mundial",
+    },
+    {
+      Image: "carousel3.png",
+      Alt: "Imagem da plateia de mundial",
+    },
+    {
+      Image: "carousel2.jpg",
+      Alt: "Imagem do estadio do mundial",
+    },
+  ];
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -14,18 +33,18 @@ export const Carousel: React.FC = () => {
   }, [emblaApi]);
 
   return (
-    <Flex justifyContent={["center"]} w={["100%"]} h={["60vh"]}>
+    <Flex w={["100%"]} justifyContent="center">
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
-          <div className="embla__slide">
-            <Image as="img" src="carouselTest1.png" alt="" />
-          </div>
-          <div className="embla__slide">
-            <Image as="img" src="carouselTest2.png" alt="" />
-          </div>
-          <div className="embla__slide">
-            <Image as="img" src="carouselTest3.png" alt="" />
-          </div>
+          {CarouselImages.map((CarouselImage, index) => (
+            <div className="embla__slide" key={`${CarouselImage}-${index}`}>
+              <Image
+                src={CarouselImage.Image}
+                alt={CarouselImage.Alt}
+                key={`${CarouselImage}-${index}`}
+              />
+            </div>
+          ))}
         </div>
         <Flex w="100%" alignItems="center" justifyContent="space-around">
           <button className="embla__prev" onClick={scrollPrev}>
