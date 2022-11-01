@@ -36,12 +36,12 @@ export const Carousel: React.FC = () => {
     <Flex w={["100%"]} justifyContent="center">
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
-          {CarouselImages.map((CarouselImage) => (
-            <div className="embla__slide" key={null}>
+          {CarouselImages.map((CarouselImage, index) => (
+            <div className="embla__slide" key={`${CarouselImage}-${index}`}>
               <Image
                 src={CarouselImage.Image}
                 alt={CarouselImage.Alt}
-                key={null}
+                key={`${CarouselImage}-${index}`}
               />
             </div>
           ))}
