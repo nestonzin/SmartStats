@@ -14,17 +14,23 @@ export const Carousel: React.FC = () => {
   }, [emblaApi]);
 
   return (
-    <Flex justifyContent={["center"]} w={["100%"]} h={["60vh"]}>
+    <Flex
+      w={["100%"]}
+      justifyContent="center"
+    >
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
           <div className="embla__slide">
-            <Image as="img" src="carouselTest1.png" alt="" />
+            <Image as="img" src="carousel1.jpg" alt="" />
           </div>
           <div className="embla__slide">
-            <Image as="img" src="carouselTest2.png" alt="" />
+            <Image as="img" src="carousel2.jpg" alt="" />
           </div>
           <div className="embla__slide">
-            <Image as="img" src="carouselTest3.png" alt="" />
+            <Image as="img" src="carousel3.png" alt="" />
+          </div>
+          <div className="embla__slide">
+            <Image as="img" src="carousel4.png" alt="" />
           </div>
         </div>
         <Flex w="100%" alignItems="center" justifyContent="space-around">

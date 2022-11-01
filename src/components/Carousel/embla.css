@@ -3,7 +3,8 @@
 }
 .embla__container {
   display: flex;
-  padding: 1rem;
+  height: 45vh; 
+  background-color: black;
 }
 
 .embla__slide {
@@ -13,7 +14,6 @@
 }
 
 .embla__slide img {
-  max-width: 35rem;
   width: 100%;
   height: auto;
 }
