@@ -7,9 +7,13 @@ import { DefaultLayout } from "../_layouts";
 export default function Home() {
   return (
     <DefaultLayout>
-      <Flex overflow={["auto", "hidden"]}>
+      <Flex h="90vh" overflow={["auto", "hidden"]}>
         <Sidebar />
-        <Flex flexDirection="column" w={["80%"]} h={["90vh"]}>
+        <Flex
+          flexDirection="column"
+          w={["80%"]}
+          justifyContent={["space-between"]}
+        >
           <Carousel />
           <LastMatches />
         </Flex>
