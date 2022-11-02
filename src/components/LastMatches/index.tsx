@@ -71,6 +71,7 @@ export const LastMatches = () => {
           completedEvents?.map((completedEvent, index) => (
             <Flex
               flexDirection={["column"]}
+              gap={[".2rem"]}
               alignItems={["center"]}
               justifyContent={["center"]}
               p={["1rem"]}
@@ -78,11 +79,13 @@ export const LastMatches = () => {
               w={["100%"]}
               key={`${completedEvent}-${index}`}
             >
-              <Text>Ganhador</Text>
+              <Text fontWeight={["900"]}>Ganhador</Text>
               <Avatar src={getWinner(completedEvent)?.image} />
-              <Text>{getWinner(completedEvent)?.result.gameWins}</Text>
-              <Text>{completedEvent.league.name}</Text>
-              <Text>
+              <Text fontWeight={["900"]}>
+                {getWinner(completedEvent)?.result.gameWins}
+              </Text>
+              <Text fontWeight={["900"]}>{completedEvent.league.name}</Text>
+              <Text fontWeight={["700"]}>
                 {new Date(completedEvent.startTime).toLocaleString("pt-BR", {
                   calendar: "long",
                 })}
@@ -99,11 +102,17 @@ export const LastMatches = () => {
                     src={completedEvent.match.teams[0].image}
                     size={"sm"}
                   />
-                  <Text>{completedEvent.match.teams[0].name}</Text>
+                  <Text fontWeight={["900"]}>
+                    {completedEvent.match.teams[0].code}
+                  </Text>
                 </Flex>
-                <Text>VS</Text>
+                <Text fontWeight={["700"]} fontSize={["1rem"]}>
+                  VS
+                </Text>
                 <Flex alignItems={["center"]} gap={[".5rem"]}>
-                  <Text>{completedEvent.match.teams[1].name}</Text>
+                  <Text fontWeight={["900"]}>
+                    {completedEvent.match.teams[1].code}
+                  </Text>
                   <Avatar
                     src={completedEvent.match.teams[1].image}
                     size={"sm"}

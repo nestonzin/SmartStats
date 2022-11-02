@@ -24,7 +24,7 @@ export const Carousel: React.FC = () => {
     },
   ];
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({stopOnInteraction:false, delay:4000})]);
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
 

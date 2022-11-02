@@ -1,4 +1,9 @@
-export const PrevButton = ({ enabled, onClick }) => (
+interface IButtons {
+  enabled: boolean;
+  onClick: () => void;
+}
+
+export const PrevButton = ({ enabled, onClick }: IButtons) => (
   <button
     className="embla__button embla__button--prev"
     onClick={onClick}
@@ -10,7 +15,7 @@ export const PrevButton = ({ enabled, onClick }) => (
   </button>
 );
 
-export const NextButton = ({ enabled, onClick }) => (
+export const NextButton = ({ enabled, onClick }: IButtons) => (
   <button
     className="embla__button embla__button--next"
     onClick={onClick}
