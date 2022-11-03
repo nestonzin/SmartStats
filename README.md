@@ -10,10 +10,22 @@ SmartStats é uma pagina desenvolvida para mostrar status em tempo real de parti
 
 ## Colaboradores
 
+# DesignUI/UX
 - [Design/UI/UX]() - Leticia <br>
+
+# TechLeader
 - [TechLeader](https://github.com/w1redl4in) - Felipe Austriaco <br>
+- [Linkedin](https://www.linkedin.com/in/felipe-austriaco-dev/) <br>
+- [Portfolio](https://www.felipeaustriaco.dev) <br>
+
+# Desenvolvedor
 - [Desenvolvedor](https://github.com/Buletiss) - Vinicius <br>
+- [Linkedin](https://www.linkedin.com/in/viniciussouza23/) <br>
+
+# Desenvolvedor
 - [Desenvolvedor](https://github.com/nestonzin) - Nestor <br>
+- [Linkedin](https://www.linkedin.com/in/nestormacedojs/) <br>
+- [Portfolio](https://portfolio-nestonzin.vercel.app) <br>
 
 ## Techs usadas
 
