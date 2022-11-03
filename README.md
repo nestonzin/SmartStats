@@ -11,7 +11,8 @@ SmartStats é uma pagina desenvolvida para mostrar status em tempo real de parti
 ## Colaboradores
 
 # DesignUI/UX
-- [Design/UI/UX]() - Leticia <br>
+- [Design/UI/UX](https://www.linkedin.com/in/leticia-regina/) - Leticia <br>
+- [Linkedin](https://www.linkedin.com/in/leticia-regina/) <br>
 
 # TechLeader
 - [TechLeader](https://github.com/w1redl4in) - Felipe Austriaco <br>
