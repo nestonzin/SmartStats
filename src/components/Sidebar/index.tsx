@@ -1,6 +1,6 @@
-import { Avatar, Box, Flex, Text, Spinner } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import api from "../../services/api";
+import { Avatar, Box, Flex, Text, Spinner } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import api from '../../services/api';
 
 interface Match {
   teams: {
@@ -23,12 +23,16 @@ export const Sidebar = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
+  const removeTbdAndTftFromSchedule = (jogos: Schedule) => {
+    return jogos.match.teams[0].code !== 'TBD' && jogos.match.teams[0].code !== 'TFT';
+  };
+
   useEffect(() => {
     setIsLoading(true);
     async function getScheduleGames() {
-      const response = await api.get("/getSchedule", {
+      const response = await api.get('/getSchedule', {
         params: {
-          hl: "pt-BR",
+          hl: 'pt-BR',
         },
       });
       setSchedules(response.data.data.schedule.events);
@@ -40,7 +44,7 @@ export const Sidebar = () => {
   return (
     <Flex
       bg="brand"
-      w={["100%", "100%", "100%", "25%"]}
+      w={['100%', '100%', '100%', '25%']}
       h="100vh"
       flexDirection="column"
       justifyContent="flex-start"
@@ -50,7 +54,7 @@ export const Sidebar = () => {
         <Spinner color="white" alignSelf="center" />
       ) : (
         schedules
-          .filter((schedule) => schedule.state.includes("unstarted"))
+          .filter(schedule => schedule.state.includes('unstarted'))
           .map((schedule, index) => (
             <Flex
               key={`${schedule}-${index}`}
@@ -60,19 +64,15 @@ export const Sidebar = () => {
               cursor="pointer"
               border="1px"
             >
-              {schedule.match.teams[0].code !== "TBD" && (
+              {removeTbdAndTftFromSchedule(schedule) && (
                 <>
                   <Text fontWeight="500">
-                    {new Date(schedule.startTime).toLocaleString("pt-BR", {
-                      calendar: "long",
+                    {new Date(schedule.startTime).toLocaleString('pt-BR', {
+                      calendar: 'long',
                     })}
                   </Text>
                   <Text fontWeight="500">{schedule.league.name}</Text>
-                  <Flex
-                    justifyContent="space-between"
-                    w="100%"
-                    alignItems="center"
-                  >
+                  <Flex justifyContent="space-between" w="100%" alignItems="center">
                     <Box>
                       <Avatar size="sm" src={schedule.match.teams[0].image} />
                       <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
