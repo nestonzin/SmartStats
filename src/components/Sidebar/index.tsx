@@ -23,6 +23,10 @@ export const Sidebar = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
+  const removeTbdAndTftFromSchedule = (jogos: Schedule) => {
+    return jogos.match.teams[0].code !== 'TBD' && jogos.match.teams[0].code !== 'TFT';
+  };
+
   useEffect(() => {
     setIsLoading(true);
     async function getScheduleGames() {
@@ -60,7 +64,7 @@ export const Sidebar = () => {
               cursor="pointer"
               border="1px"
             >
-              {schedule.match.teams[0].code !== 'TBD' && schedule.match.teams[0].code !== 'TFT' && (
+              {removeTbdAndTftFromSchedule(schedule) && (
                 <>
                   <Text fontWeight="500">
                     {new Date(schedule.startTime).toLocaleString('pt-BR', {
