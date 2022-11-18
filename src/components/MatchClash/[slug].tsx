@@ -1,7 +1,6 @@
 import { Flex, Avatar, Text, Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import { useRouter } from "next/router";
 
 interface Match {
   id: string;
@@ -22,9 +21,6 @@ interface Schedule {
 }
 
 export const MatchClash = () => {
-  const { query } = useRouter();
-  console.log(query.slug);
-
   const [schedules, setSchedules] = useState<Schedule[]>([]);
 
   useEffect(() => {
