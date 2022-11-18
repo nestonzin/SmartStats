@@ -52,7 +52,7 @@ export const Sidebar = () => {
         <Spinner color="white" alignSelf="center" />
       ) : (
         schedules
-          // .filter((schedule) => schedule.state.includes("unstarted"))
+          .filter((schedule) => schedule.state.includes("unstarted"))
           .map((schedule, index) => (
             <NextLink
               href={`/match/${schedule.match.id}`}
