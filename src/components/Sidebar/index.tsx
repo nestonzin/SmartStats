@@ -1,8 +1,10 @@
-import { Avatar, Box, Flex, Text, Spinner } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import api from '../../services/api';
+import { Avatar, Box, Flex, Text, Spinner } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
+import NextLink from "next/link";
 
 interface Match {
+  id: string;
   teams: {
     name: string;
     code: string;
@@ -56,40 +58,57 @@ export const Sidebar = () => {
         schedules
           .filter(schedule => schedule.state.includes('unstarted'))
           .map((schedule, index) => (
-            <Flex
+            <NextLink
+              href={`/match/${schedule.match.id}`}
               key={`${schedule}-${index}`}
-              flexDirection="column"
-              alignItems="center"
-              bg="#D9D9D9"
-              cursor="pointer"
-              border="1px"
             >
-              {removeTbdAndTftFromSchedule(schedule) && (
-                <>
-                  <Text fontWeight="500">
-                    {new Date(schedule.startTime).toLocaleString('pt-BR', {
-                      calendar: 'long',
-                    })}
-                  </Text>
-                  <Text fontWeight="500">{schedule.league.name}</Text>
-                  <Flex justifyContent="space-between" w="100%" alignItems="center">
-                    <Box>
-                      <Avatar size="sm" src={schedule.match.teams[0].image} />
-                      <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
-                        {schedule.match.teams[0].code}
-                      </Text>
-                    </Box>
-                    <Text fontWeight="500">vs</Text>
-                    <Box>
-                      <Avatar size="sm" src={schedule.match.teams[1].image} />
-                      <Text fontWeight="bold" lineHeight="30px" fontSize="20px">
-                        {schedule.match.teams[1].code}
-                      </Text>
-                    </Box>
-                  </Flex>
-                </>
-              )}
-            </Flex>
+              <Flex
+                key={`${schedule}-${index}`}
+                flexDirection="column"
+                alignItems="center"
+                bg="#D9D9D9"
+                cursor="pointer"
+                border="1px"
+              >
+                {schedule.match.teams[0].code !== "TBD" && (
+                  <>
+                    <Text fontWeight="500">
+                      {new Date(schedule.startTime).toLocaleString("pt-BR", {
+                        calendar: "long",
+                      })}
+                    </Text>
+                    <Text fontWeight="500">{schedule.league.name}</Text>
+                    <Flex
+                      justifyContent="space-between"
+                      w="100%"
+                      alignItems="center"
+                    >
+                      <Box>
+                        <Avatar size="sm" src={schedule.match.teams[0].image} />
+                        <Text
+                          fontWeight="bold"
+                          lineHeight="30px"
+                          fontSize="20px"
+                        >
+                          {schedule.match.teams[0].code}
+                        </Text>
+                      </Box>
+                      <Text fontWeight="500">vs</Text>
+                      <Box>
+                        <Avatar size="sm" src={schedule.match.teams[1].image} />
+                        <Text
+                          fontWeight="bold"
+                          lineHeight="30px"
+                          fontSize="20px"
+                        >
+                          {schedule.match.teams[1].code}
+                        </Text>
+                      </Box>
+                    </Flex>
+                  </>
+                )}
+              </Flex>
+            </NextLink>
           ))
       )}
     </Flex>
