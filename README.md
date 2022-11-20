@@ -4,12 +4,29 @@
 Este é um projeto desenvolvido para estudos <br>
 SmartStats é uma pagina desenvolvida para mostrar status em tempo real de partidas de e-sports
 
+## Veja o projeto
+
+- [SmartStats](https://smartstats.vercel.app)<br>
+
 ## Colaboradores
 
-Design/UI/UX - Leticia <br>
-TechLeader - Felipe Austriaco <br>
-Desenvolvedor - Vinicius <br>
-Desenvolvedor - Nestor <br>
+# DesignUI/UX
+- [Design/UI/UX](https://www.linkedin.com/in/leticia-regina/) - Leticia <br>
+- [Linkedin](https://www.linkedin.com/in/leticia-regina/) <br>
+
+# TechLeader
+- [TechLeader](https://github.com/w1redl4in) - Felipe Austriaco <br>
+- [Linkedin](https://www.linkedin.com/in/felipe-austriaco-dev/) <br>
+- [Portfolio](https://www.felipeaustriaco.dev) <br>
+
+# Desenvolvedor
+- [Desenvolvedor](https://github.com/Buletiss) - Vinicius <br>
+- [Linkedin](https://www.linkedin.com/in/viniciussouza23/) <br>
+
+# Desenvolvedor
+- [Desenvolvedor](https://github.com/nestonzin) - Nestor <br>
+- [Linkedin](https://www.linkedin.com/in/nestormacedojs/) <br>
+- [Portfolio](https://portfolio-nestonzin.vercel.app) <br>
 
 ## Techs usadas
 
@@ -28,4 +45,4 @@ Desenvolvedor - Nestor <br>
 ## Visualização do projeto
 
 
-![image](https://user-images.githubusercontent.com/98488163/197835601-4c780854-4e52-4318-bbaa-d94be11cf6b8.png)
+![image](https://media.discordapp.net/attachments/1020955308111171634/1037399509480767519/unknown.png?width=953&height=473)
