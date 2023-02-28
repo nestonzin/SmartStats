@@ -1,4 +1,3 @@
-import matchmock from "../../mocks/match.json";
 import {
   Box,
   Flex,
@@ -15,100 +14,45 @@ import {
   Avatar,
   VStack,
 } from "@chakra-ui/react";
+import {
+  Frame as FrameWindow,
+  Participant as ParticipantWindow,
+} from "../../modules/windowLiveTypes";
+import { GameDetails } from "../../modules/PersistendDetailsTypes";
+import { GameMetadata } from "../../modules/windowLiveTypes";
+import { Frame as FrameDetails } from "../../modules/detailLiveTypes";
+import { CHAMPIONS_URL } from "../../services/LolApi";
+import { useState } from "react";
 
-export interface Root {
-  esportsGameId: string;
-  esportsMatchId: string;
+type Props = {
+  lastFrameWindow: FrameWindow;
+  lastFrameDetails: FrameDetails;
   gameMetadata: GameMetadata;
-  frames: Frame[];
-}
+  gameDetails: GameDetails;
+};
 
-export interface GameMetadata {
-  patchVersion: string;
-  blueTeamMetadata: BlueTeamMetadata;
-  redTeamMetadata: RedTeamMetadata;
-}
-
-export interface BlueTeamMetadata {
-  esportsTeamId: string;
-  participantMetadata: ParticipantMetadaum[];
-}
-
-export interface ParticipantMetadaum {
-  participantId: number;
-  summonerName: string;
-  championId: string;
-  role: string;
-}
-
-export interface RedTeamMetadata {
-  esportsTeamId: string;
-  participantMetadata: ParticipantMetadaum2[];
-}
-
-export interface ParticipantMetadaum2 {
-  participantId: number;
-  summonerName: string;
-  championId: string;
-  role: string;
-}
-
-export interface Frame {
-  rfc460Timestamp: string;
-  gameState: string;
-  blueTeam: BlueTeam;
-  redTeam: RedTeam;
-}
-
-export interface BlueTeam {
-  totalGold: number;
-  inhibitors: number;
-  towers: number;
-  barons: number;
-  totalKills: number;
-  dragons: string[];
-  participants: Participant[];
-}
-
-export interface Participant {
-  participantId: number;
-  level: number;
-  kills: number;
-  deaths: number;
-  assists: number;
-  creepScore: number;
-  totalGold: number;
-  currentHealth: number;
-  maxHealth: number;
-}
-
-export interface RedTeam {
-  totalGold: number;
-  inhibitors: number;
-  towers: number;
-  barons: number;
-  totalKills: number;
-  dragons: string[];
-  participants: Participant2[];
-}
-
-export interface Participant2 {
-  participantId: number;
-  level?: number;
-  kills?: number;
-  deaths?: number;
-  assists?: number;
-  creepScore?: number;
-  totalGold?: number;
-  currentHealth?: number;
-  maxHealth?: number;
-  summonerName?: string;
-  championId?: string;
-  role?: string;
-}
-
-export const TableStats = () => {
-  const matchStats: Root = matchmock;
+export const PlayersTable = ({
+  lastFrameDetails,
+  lastFrameWindow,
+  gameMetadata,
+  gameDetails,
+}: Props) => {
+  let blueTeam = gameDetails?.data.event.match.teams[0];
+  let redTeam = gameDetails?.data.event.match.teams[1];
+  const auxBlueTeam = blueTeam;
+  /*
+        As vezes os times continuam errados mesmo apos verificar o ultimo frame,
+        em ligas como TCL, por isso fazemos essa verificação pelo nome
+    */
+  const summonerName =
+    gameMetadata?.blueTeamMetadata.participantMetadata[0].summonerName.split(
+      " "
+    );
+  if (redTeam?.code.startsWith(summonerName[0])) {
+    // Temos que verificar apenas os primeiros caracteres pois os times academy usam o A, a mais na tag mas não nos nomes
+    blueTeam = redTeam;
+    redTeam = auxBlueTeam;
+  }
 
   return (
     <TableContainer>
@@ -116,7 +60,7 @@ export const TableStats = () => {
         <Table variant="simple" size="sm">
           <Thead>
             <Tr>
-              <Th>PAIN</Th>
+              <Th>{blueTeam.code}</Th>
               <Th>Vida</Th>
               <Th>Itens</Th>
               <Th>CS</Th>
@@ -126,9 +70,10 @@ export const TableStats = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {matchStats.frames[0].blueTeam.participants.map(
-              (participant, index) => (
-                <Tr key={`${participant}-${index}`}>
+            {lastFrameWindow.blueTeam.participants.map(
+              (player: ParticipantWindow) => (
+                //precisa passar uma chave certa !!!
+                <Tr key={`${player}-${player}`}>
                   <Td maxW={["10rem"]} minW={["10rem"]}>
                     <Flex
                       alignItems="center"
@@ -138,19 +83,25 @@ export const TableStats = () => {
                     >
                       <Avatar
                         size={"sm"}
-                        src={`https://ddragon.bangingheads.net/cdn/11.1.1/img/champion/${matchStats.gameMetadata.blueTeamMetadata.participantMetadata[index].championId}.png`}
+                        src={`https://ddragon.bangingheads.net/cdn/11.1.1/img/champion/${
+                          gameMetadata.blueTeamMetadata.participantMetadata[
+                            player.participantId - 1
+                          ].championId
+                        }.png`}
                       />
                       <Box>
                         <Text fontWeight={900}>
                           {
-                            matchStats.gameMetadata.blueTeamMetadata
-                              .participantMetadata[index].championId
+                            gameMetadata.blueTeamMetadata.participantMetadata[
+                              player.participantId - 1
+                            ].championId
                           }
                         </Text>
                         <Text>
                           {
-                            matchStats.gameMetadata.blueTeamMetadata
-                              .participantMetadata[index].summonerName
+                            gameMetadata.blueTeamMetadata.participantMetadata[
+                              player.participantId - 1
+                            ].summonerName
                           }
                         </Text>
                       </Box>
@@ -164,7 +115,7 @@ export const TableStats = () => {
                       color="white"
                       fontWeight="700"
                     >
-                      {participant.maxHealth}
+                      {/* {participant.maxHealth} */}
                     </Box>
                   </Td>
                   <Td>
@@ -185,20 +136,20 @@ export const TableStats = () => {
                     </Flex>
                   </Td>
                   <Td isNumeric>
-                    <Box textAlign="left">{participant.creepScore}</Box>
+                    <Box textAlign="left">{player.creepScore}</Box>
                   </Td>
                   <Td isNumeric>
                     <Flex textAlign="left">
-                      <Text>{participant.kills}/</Text>
-                      <Text>{participant.deaths}/</Text>
-                      <Text>{participant.assists}</Text>
+                      <Text>{player.kills}/</Text>
+                      <Text>{player.deaths}/</Text>
+                      <Text>{player.assists}</Text>
                     </Flex>
                   </Td>
                   <Td isNumeric>
-                    <Box textAlign="left">{participant.totalGold}</Box>
+                    <Box textAlign="left">{player.totalGold}</Box>
                   </Td>
                   <Td isNumeric>
-                    <Box textAlign="left">{participant.totalGold}</Box>
+                    <Box textAlign="left">{player.totalGold}</Box>
                   </Td>
                 </Tr>
               )
@@ -208,7 +159,7 @@ export const TableStats = () => {
         <Table variant="simple" size="sm">
           <Thead>
             <Tr>
-              <Th>PAIN</Th>
+              <Th>{redTeam.code}</Th>
               <Th>Vida</Th>
               <Th>Itens</Th>
               <Th>CS</Th>
@@ -218,9 +169,9 @@ export const TableStats = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {matchStats.frames[0].redTeam.participants.map(
-              (participant, index) => (
-                <Tr key={`${participant}-${index}`}>
+            {lastFrameWindow.redTeam.participants.map(
+              (player: ParticipantWindow) => (
+                <Tr key={`${player}-${player}`}>
                   <Td maxW={["10rem"]} minW={["10rem"]}>
                     <Flex
                       alignItems="center"
@@ -230,19 +181,25 @@ export const TableStats = () => {
                     >
                       <Avatar
                         size={"sm"}
-                        src={`https://ddragon.bangingheads.net/cdn/11.1.1/img/champion/${matchStats.gameMetadata.redTeamMetadata.participantMetadata[index].championId}.png`}
+                        src={`https://ddragon.bangingheads.net/cdn/11.1.1/img/champion/${
+                          gameMetadata.redTeamMetadata.participantMetadata[
+                            player.participantId - 1
+                          ].championId
+                        }.png`}
                       />
                       <Box>
                         <Text fontWeight={900}>
                           {
-                            matchStats.gameMetadata.redTeamMetadata
-                              .participantMetadata[index].championId
+                            gameMetadata.redTeamMetadata.participantMetadata[
+                              player.participantId - 1
+                            ].championId
                           }
                         </Text>
                         <Text>
                           {
-                            matchStats.gameMetadata.redTeamMetadata
-                              .participantMetadata[index].summonerName
+                            gameMetadata.redTeamMetadata.participantMetadata[
+                              player.participantId - 1
+                            ].summonerName
                           }
                         </Text>
                       </Box>
@@ -256,7 +213,7 @@ export const TableStats = () => {
                       color="white"
                       fontWeight="700"
                     >
-                      {participant.maxHealth}
+                      {/* {participant.maxHealth} */}
                     </Box>
                   </Td>
                   <Td>
@@ -277,20 +234,20 @@ export const TableStats = () => {
                     </Flex>
                   </Td>
                   <Td isNumeric>
-                    <Box textAlign="left">{participant.creepScore}</Box>
+                    <Box textAlign="left">{player.creepScore}</Box>
                   </Td>
                   <Td isNumeric>
                     <Flex textAlign="left">
-                      <Text>{participant.kills}/</Text>
-                      <Text>{participant.deaths}/</Text>
-                      <Text>{participant.assists}</Text>
+                      <Text>{player.kills}/</Text>
+                      <Text>{player.deaths}/</Text>
+                      <Text>{player.assists}</Text>
                     </Flex>
                   </Td>
                   <Td isNumeric>
-                    <Box textAlign="left">{participant.totalGold}</Box>
+                    <Box textAlign="left">{player.totalGold}</Box>
                   </Td>
                   <Td isNumeric>
-                    <Box textAlign="left">{participant.totalGold}</Box>
+                    <Box textAlign="left">{player.totalGold}</Box>
                   </Td>
                 </Tr>
               )

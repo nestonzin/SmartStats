@@ -2,7 +2,7 @@ import { Text, Flex, Image, Avatar, Icon } from "@chakra-ui/react";
 import { HolySword, Tower, SettingOne, Duck } from "@icon-park/react";
 import { Coin } from "phosphor-react";
 
-export const TeamStatus = () => {
+export const ObjectiveWard = () => {
   const teamStatus = [
     {
       icon: SettingOne,
