@@ -1,6 +1,6 @@
 import { Avatar, Box, Flex, Text, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import api from "../../services/api";
+import api from "../../services/LolApi";
 import NextLink from "next/link";
 
 interface Match {
@@ -26,15 +26,17 @@ export const Sidebar = () => {
   const [isLoading, setIsLoading] = useState<Boolean>(false);
 
   const removeTbdAndTftFromSchedule = (jogos: Schedule) => {
-    return jogos.match.teams[0].code !== 'TBD' && jogos.match.teams[0].code !== 'TFT';
+    return (
+      jogos.match.teams[0].code !== "TBD" && jogos.match.teams[0].code !== "TFT"
+    );
   };
 
   useEffect(() => {
     setIsLoading(true);
     async function getScheduleGames() {
-      const response = await api.get('/getSchedule', {
+      const response = await api.get("/getSchedule", {
         params: {
-          hl: 'pt-BR',
+          hl: "pt-BR",
         },
       });
       setSchedules(response.data.data.schedule.events);
@@ -46,7 +48,7 @@ export const Sidebar = () => {
   return (
     <Flex
       bg="brand"
-      w={['100%', '100%', '100%', '25%']}
+      w={["100%", "100%", "100%", "25%"]}
       h="100vh"
       flexDirection="column"
       justifyContent="flex-start"
@@ -56,7 +58,7 @@ export const Sidebar = () => {
         <Spinner color="white" alignSelf="center" />
       ) : (
         schedules
-          .filter(schedule => schedule.state.includes('unstarted'))
+          .filter((schedule) => schedule.state.includes("unstarted"))
           .map((schedule, index) => (
             <NextLink
               href={`/match/${schedule.match.id}`}

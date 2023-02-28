@@ -10,6 +10,7 @@ export const Navbar = () => {
       alignItems="center"
       p="1rem"
       h="10vh"
+      w="100%"
     >
       <Text fontWeight="bold" color="white">
         SmartStats

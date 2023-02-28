@@ -1,6 +1,6 @@
 import { Avatar, Box, Flex, Spinner, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import api from "../../services/api";
+import api from "../../services/LolApi";
 
 interface Match {
   type: string;
